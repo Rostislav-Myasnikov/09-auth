@@ -1,13 +1,13 @@
 "use client";
 
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { fetchNotes } from "@/lib/api";
+import { fetchNotes } from "@/lib/clientApi";
 import NoteList from "@/components/NoteList/NoteList";
 import { useState } from "react";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import { Toaster } from "react-hot-toast";
 import Pagination from "@/components/Pagination/Pagination";
-import css from "@/app/notes/notes.module.css";
+import css from "../../notes.module.css";
 import { useRouter } from "next/navigation";
 
 type Prop = {

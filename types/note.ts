@@ -7,8 +7,3 @@ export interface Note {
   tag: string;
 }
 
-export interface NewNote {
-  title: string;
-  content: string;
-  tag: string;
-}

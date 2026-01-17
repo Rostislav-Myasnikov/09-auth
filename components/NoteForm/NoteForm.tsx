@@ -2,7 +2,7 @@
 
 import css from "./NoteForm.module.css";
 import type { NewNote } from "@/types/note";
-import { createNote } from "@/lib/api";
+import { createNote } from "@/lib/clientApi";
 import { useMutation } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
