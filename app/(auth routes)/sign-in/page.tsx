@@ -1,6 +1,6 @@
 "use client";
 
-import { login, LoginRequest } from "@/lib/clientApi";
+import { login, LoginRequest } from "@/lib/api/clientApi";
 import css from "./page.module.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

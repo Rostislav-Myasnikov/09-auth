@@ -1,5 +1,5 @@
 import { User } from "@/types/user";
-import { serverApi } from "./api";
+import { serverApi } from "./api/api";
 import { cookies } from "next/headers";
 
 export async function fetchNotesServer(params: {

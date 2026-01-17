@@ -4,7 +4,7 @@ import css from "./page.module.css";
 import Image from "next/image";
 import { useAuthStore } from "@/lib/store/authStore";
 import { useRouter } from "next/navigation";
-import { updateMe, UpdateUser } from "@/lib/clientApi";
+import { updateMe, UpdateUser } from "@/lib/api/clientApi";
 import {} from "@/types/user";
 
 export default function Edit() {
