@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function AuthNavigation() {
   const isAuth = useAuthStore((s) => s.isAuthenticated);
-  const user = useAuthStore((s) => s.userInfo);
+  const user = useAuthStore((s) => s.user);
   const clearAuth = useAuthStore((s) => s.clearIsAuthenticated);
   const router = useRouter();
 

@@ -1,4 +1,4 @@
-import NoteDatailsClient from "./NoteDetails.client";
+import NoteDetailsClient from "./NoteDetails.client";
 import {
   QueryClient,
   HydrationBoundary,
@@ -47,7 +47,7 @@ export default async function NoteDetails({ params }: Props) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NoteDatailsClient />
+      <NoteDetailsClient />
     </HydrationBoundary>
   );
 }

@@ -1,4 +1,4 @@
-import { UserAuth } from "@/types/note";
+import { User } from "@/types/user";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -6,10 +6,10 @@ import { persist } from "zustand/middleware";
 
 
 type AuthStore = {
-    userInfo: UserAuth | null;
+    user: User | null;
     isAuthenticated: boolean;
 
-    setUser: (user:UserAuth ) => void; 
+    setUser: (user:User ) => void; 
     clearIsAuthenticated: () => void;
 }
 
@@ -17,10 +17,10 @@ type AuthStore = {
 export const useAuthStore = create<AuthStore>()(
     persist(
         (set) => ({
-            userInfo: null,
+            user: null,
             isAuthenticated: false,
-            setUser: (user: UserAuth) => set(()=> ({userInfo: user, isAuthenticated: true})),
-            clearIsAuthenticated: () => set(() => ({userInfo:null, isAuthenticated: false}))
+            setUser: (user: User) => set(()=> ({user: user, isAuthenticated: true})),
+            clearIsAuthenticated: () => set(() => ({user:null, isAuthenticated: false}))
         }),
         {name: 'user-draft'}
 ));

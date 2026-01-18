@@ -9,7 +9,7 @@ import {} from "@/types/user";
 
 
 export default function Edit() {
-  const user = useAuthStore((s) => s.userInfo);
+  const user = useAuthStore((s) => s.user);
   const setUser = useAuthStore((s) => s.setUser);
   const router = useRouter();
 
