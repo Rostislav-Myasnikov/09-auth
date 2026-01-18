@@ -7,8 +7,8 @@ export async function fetchNotesServer(params: {
   tag?: string;
   query?: string;
 }) {
-  const cookieStore = cookies().toString();
-
+  const cookieStore = await cookies();
+  const cookieString = cookieStore.toString();
 
   const { data } = await serverApi.get("/notes", {
     params: {
@@ -18,7 +18,7 @@ export async function fetchNotesServer(params: {
       ...(params.tag && { tag: params.tag }),
     },
     headers: {
-      Cookie: cookieStore,
+      Cookie: cookieString,
     },
   });
 
@@ -26,33 +26,38 @@ export async function fetchNotesServer(params: {
 }
 
 export async function fetchNoteByIdServer(id: string) {
-const cookieStore = cookies().toString();
+  const cookieStore = await cookies();
+  const cookieString = cookieStore.toString();
+  
   const res = await serverApi.get(`/notes/${id}`, {
-    headers: { cookieStore },
+    headers: { 
+      Cookie: cookieString
+    },
   });
   return res.data;
 }
 
 export async function getMeServer(): Promise<User> {
-const cookieStore = cookies().toString();
+  const cookieStore = await cookies();
+  const cookieString = cookieStore.toString();
 
   const res = await serverApi.get<User>(`/users/me`, {
     headers: {
-      Cookie: cookieStore,
+      Cookie: cookieString,
     },
   });
   return res.data;
 }
 
 export async function checkSessionServer() {
-const cookieStore = cookies().toString();
+  const cookieStore = await cookies();
+  const cookieString = cookieStore.toString();
 
-    const res = await serverApi.get(`/auth/session`, {
-      headers: {
-        Cookie: cookieStore,
-      },
-    });
+  const res = await serverApi.get(`/auth/session`, {
+    headers: {
+      Cookie: cookieString,
+    },
+  });
 
-    return res;
-  
+  return res;
 }
