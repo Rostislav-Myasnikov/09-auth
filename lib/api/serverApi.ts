@@ -7,12 +7,8 @@ export async function fetchNotesServer(params: {
   tag?: string;
   query?: string;
 }) {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
-  const refreshToken = cookieStore.get("refreshToken")?.value;
-  const cookie = [];
-  if (accessToken) cookie.push(`accessToken=${accessToken}`);
-  if (refreshToken) cookie.push(`refreshToken=${refreshToken}`);
+  const cookieStore = cookies().toString();
+
 
   const { data } = await serverApi.get("/notes", {
     params: {
@@ -22,7 +18,7 @@ export async function fetchNotesServer(params: {
       ...(params.tag && { tag: params.tag }),
     },
     headers: {
-      Cookie: cookie.join("; "),
+      Cookie: cookieStore,
     },
   });
 
@@ -30,43 +26,30 @@ export async function fetchNotesServer(params: {
 }
 
 export async function fetchNoteByIdServer(id: string) {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
-  const refreshToken = cookieStore.get("refreshToken")?.value;
-  const cookie = [];
-  if (accessToken) cookie.push(`accessToken=${accessToken}`);
-  if (refreshToken) cookie.push(`refreshToken=${refreshToken}`);
+const cookieStore = cookies().toString();
   const res = await serverApi.get(`/notes/${id}`, {
-    headers: { Cookie: cookie.join("; ") },
+    headers: { cookieStore },
   });
   return res.data;
 }
 
 export async function getMeServer(): Promise<User> {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
-  const refreshToken = cookieStore.get("refreshToken")?.value;
-  const cookie = [];
-  if (accessToken) cookie.push(`accessToken=${accessToken}`);
-  if (refreshToken) cookie.push(`refreshToken=${refreshToken}`);
+const cookieStore = cookies().toString();
+
   const res = await serverApi.get<User>(`/users/me`, {
     headers: {
-      Cookie: cookie.join("; "),
+      Cookie: cookieStore,
     },
   });
   return res.data;
 }
 
 export async function checkSessionServer() {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
-  const refreshToken = cookieStore.get("refreshToken")?.value;
-  const cookie = [];
-  if (accessToken) cookie.push(`accessToken=${accessToken}`);
-  if (refreshToken) cookie.push(`refreshToken=${refreshToken}`);
+const cookieStore = cookies().toString();
+
     const res = await serverApi.get(`/auth/session`, {
       headers: {
-        Cookie: cookie.join("; "),
+        Cookie: cookieStore,
       },
     });
 
