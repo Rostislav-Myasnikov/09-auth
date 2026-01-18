@@ -1,4 +1,4 @@
-import { fetchNotes } from "@/lib/api/clientApi";
+import { fetchNotesServer } from "@/lib/api/serverApi";
 import NoteFilterClient from "./Notes.client";
 import {
   dehydrate,
@@ -44,7 +44,7 @@ export default async function NotesFilterPage({ params }: Prop) {
   await queryClient.prefetchQuery({
     queryKey: ["noteTag", category],
     queryFn: () =>
-      fetchNotes({
+      fetchNotesServer({
         tag: category,
         page: 1,
       }),

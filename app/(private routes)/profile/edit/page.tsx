@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation";
 import { updateMe, UpdateUser } from "@/lib/api/clientApi";
 import {} from "@/types/user";
 
+
 export default function Edit() {
   const user = useAuthStore((s) => s.userInfo);
-  const setUser = useAuthStore((s) => s.setUser)
+  const setUser = useAuthStore((s) => s.setUser);
   const router = useRouter();
 
   const handleBack = () => {
@@ -22,7 +23,7 @@ export default function Edit() {
     const formData = new FormData(e.currentTarget);
     const formValues = Object.fromEntries(formData) as UpdateUser;
     const res = await updateMe(formValues);
-    setUser(res)
+    setUser(res);
     router.push("/profile");
   };
 

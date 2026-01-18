@@ -12,3 +12,9 @@ export interface NewNote {
   content: string;
   tag: string;
 }
+
+export interface UserAuth {
+  email?: string;
+  username: string;
+  avatar?: string;
+}

@@ -13,7 +13,7 @@ export default function AuthProvider({ children }: Prop) {
   const clearAuth = useAuthStore((s) => s.clearIsAuthenticated);
 
   useEffect(() => {
-    const fethUser = async () => {
+    const fetchUser = async () => {
       const isAuth = await checkSession();
       if (isAuth) {
         const user = await getMe()
@@ -22,7 +22,7 @@ export default function AuthProvider({ children }: Prop) {
         clearAuth();
       }
     };
-    fethUser();
+    fetchUser();
   }, [setUser, clearAuth]);
   return children;
 }

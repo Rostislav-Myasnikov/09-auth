@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
-import { checkSessionServer } from "./lib/serverApi";
+import { checkSessionServer } from "./lib/api/serverApi";
 
 const privateRoutes = ["/profile", "/notes/filter"];
 const authRoutes = ["/sign-in", "/sign-up"];
@@ -21,8 +21,8 @@ export async function proxy(request: NextRequest) {
 
   if (!accessToken) {
     if (refreshToken) {
-      const data = await checkSessionServer();
-      const setCookie = data.headers["set-cookie"];
+      const res = await checkSessionServer();
+      const setCookie = res.data.headers["set-cookie"];
 
       if (setCookie) {
         const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
@@ -39,7 +39,7 @@ export async function proxy(request: NextRequest) {
             cookieStore.set("refreshToken", parsed.refreshToken, options);
         }
         if (isAuthRoute) {
-          return NextResponse.redirect(new URL("/profile", request.url), {
+          return NextResponse.redirect(new URL("/", request.url), {
             headers: {
               Cookie: cookieStore.toString(),
             },
@@ -62,7 +62,7 @@ export async function proxy(request: NextRequest) {
     }
   }
   if (isAuthRoute) {
-    return NextResponse.redirect(new URL("/profile", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   if (isPrivateRoute) {

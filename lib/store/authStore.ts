@@ -1,11 +1,8 @@
+import { UserAuth } from "@/types/note";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export interface UserAuth {
-  email?: string;
-  username: string;
-  avatar?: string;
-}
+
 
 
 type AuthStore = {

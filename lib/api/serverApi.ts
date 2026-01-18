@@ -1,5 +1,5 @@
 import { User } from "@/types/user";
-import { serverApi } from "./api/api";
+import { serverApi } from "@/lib/api/api";
 import { cookies } from "next/headers";
 
 export async function fetchNotesServer(params: {
@@ -57,23 +57,19 @@ export async function getMeServer(): Promise<User> {
   return res.data;
 }
 
-export async function checkSessionServer(){
+export async function checkSessionServer() {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
   const refreshToken = cookieStore.get("refreshToken")?.value;
   const cookie = [];
   if (accessToken) cookie.push(`accessToken=${accessToken}`);
   if (refreshToken) cookie.push(`refreshToken=${refreshToken}`);
-  const res = await serverApi.get(`/auth/session`, {
-    headers: {
-      Cookie: cookie.join("; "),
-    },
-  });
+    const res = await serverApi.get(`/auth/session`, {
+      headers: {
+        Cookie: cookie.join("; "),
+      },
+    });
 
-  if (!res.data) {
-    return null;
-  }
-
-  return res.data;
+    return res;
+  
 }
-

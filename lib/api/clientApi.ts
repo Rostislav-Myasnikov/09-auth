@@ -1,5 +1,5 @@
 import type { Note } from "@/types/note";
-import type { User} from "@/types/user";
+import type { User } from "@/types/user";
 import { apiNext } from "./api";
 
 export interface NewNote {
@@ -31,8 +31,8 @@ export type LoginRequest = {
 };
 
 export type UpdateUser = {
-    username: string
-}
+  username: string;
+};
 
 type SessionResponse = {
   success: boolean;
@@ -83,14 +83,14 @@ export async function logout(): Promise<void> {
 
 export async function checkSession(): Promise<boolean> {
   const res = await apiNext.get<SessionResponse>(`/auth/session`);
-  return res.data.success
+  return res.data.success;
 }
 
-export async function getMe() {
-  const res = await apiNext.get(`/users/me`);
+export async function getMe(): Promise<User> {
+  const res = await apiNext.get<User>(`/users/me`);
   return res.data;
 }
-export async function updateMe(data: UpdateUser) {
-  const res = await apiNext.patch(`/users/me`, data);
+export async function updateMe(data: UpdateUser): Promise<User> {
+  const res = await apiNext.patch<User>(`/users/me`, data);
   return res.data;
 }
